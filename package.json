@@ -1,7 +1,7 @@
 {
-  "name": "secure-env",
+  "name": "cx-secure-env",
   "version": "1.2.1",
-  "description": "Use ENVs securely with encryption",
+  "description": "Use ENVs securely with encryption. Forked so we can work with input & output files",
   "main": "dist/es5/lib/index.js",
   "preferGlobal": true,
   "bin": {
