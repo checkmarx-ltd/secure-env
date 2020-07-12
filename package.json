@@ -1,11 +1,11 @@
 {
   "name": "secure-env",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Use ENVs securely with encryption",
   "main": "dist/es5/lib/index.js",
   "preferGlobal": true,
   "bin": {
-    "secure-env": "dist/es5/lib/cli.js"
+    "cx-secure-env": "dist/es5/lib/cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kunalpanchal/secure-env.git"
+    "url": "git+https://github.com/darkflare42/secure-env.git"
   },
   "keywords": [
     "dotenv",
@@ -22,19 +22,14 @@
     "encrypt-env",
     "decrypt-env"
   ],
-  "author": "kunalpanchal",
+  "author": "darkflare42",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kunalpanchal/secure-env/issues"
-  },
-  "homepage": "https://github.com/kunalpanchal/secure-env#readme",
-  "devDependencies": {
+  "homepage": "https://github.com/darkflare42/secure-env#readme",
+  "dependencies": {
+    "minimist": "^1.2.0",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "rimraf": "^3.0.0"
-  },
-  "dependencies": {
-    "minimist": "^1.2.0"
   }
 }
