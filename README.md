@@ -66,7 +66,7 @@ Will decrypt the `.env.staging.enc` file into a `.env.staging` file by using the
 ```
 yarn df-secure-env --env production -s $(cat .env.key)
 ```
-Will encrypt a `.env.production` file into `.env.production.env.key` file using the `.env.key` file
+Will encrypt a `.env.production` file into `.env.production.enc` file using the `.env.key` file
 
 **Decrytion**:
 ```
@@ -74,6 +74,8 @@ yarn df-secure-env --env production --decrypt -s $(cat .env.key)
 ```
 Will decrypt a `.env.production.enc` into a `.env.production` file using the `.env.key` file
 
+**Notes:** 
+`--env` is optional but if provided will override the input file and output file arguments (if they are provided)
 
 That's it.
 
@@ -98,10 +100,11 @@ $ secure-env --option <VALUE> <file-path-which-is-to-be-encrypted>
 
 | Option | What does it do | Defaults |
 | ------ | ------ | ------ |
-| --secret <secretKey> | Specify the secret Key which would be later used to decrypt the file. | `mySecret` |
-| --out <file-path> | The encrypted file path that would be created. | `env.enc` |
+| --secret <secretKey> or -s | Specify the secret Key which would be later used to decrypt the file. | `mySecret` |
+| --out <file-path> or -o | The encrypted/decrypted file path that would be created. | `env.enc` |
 | --algo <algoName> | The encryption algorithm that is to be used to encrypt the env file. | `aes256` |
 | --decrypt | prints the decrypted text to stdout
+| --env <environmentName> or -e | The environment that the .env uses i.e `.env.staging.enc` is for the `staging` environment
 
 
 ### Decryption
