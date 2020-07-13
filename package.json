@@ -1,11 +1,11 @@
 {
-  "name": "cx-secure-env",
+  "name": "df-secure-env",
   "version": "1.2.1",
   "description": "Use ENVs securely with encryption. Forked so we can work with input & output files",
   "main": "dist/es5/lib/index.js",
   "preferGlobal": true,
   "bin": {
-    "cx-secure-env": "lib/cli.js"
+    "df-secure-env": "lib/cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
