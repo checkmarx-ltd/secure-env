@@ -1,14 +1,10 @@
-[![npm version](https://badge.fury.io/js/secure-env.svg)](https://badge.fury.io/js/secure-env)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/kunalpanchal/secure-env/graphs/commit-activity)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/kunalpanchal/secure-env/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://gitHub.com/kunalpanchal/secure-env/releases/)
-[![Github all releases](https://img.shields.io/github/downloads/Naereen/StrapDown.js/total.svg)](https://gitHub.com/kunalpanchal/secure-env/releases/)
-
-
 # secure-env
 
 Secure-env is a module that loads environment variables from a `.env.enc` file.A encryption tool that would helps you prevent attacks from [npm-malicious-packages][npm-malicious-packages].
+
+## Fork Reasoning
+The original package was great however I needed some extra functionality - using specific env variable files rather than the default of `.env.enc` and `.env`. I added functionality of sending a specific `-o` output to the decrypt command, as well as adding a `-e` or `--env` which uses sensible defaults based on it (Usage is explained below).
+I only modified the CLI part of this package and did not modify the cryptography algorithm or functionality beyond that.
 
 ## Usage
 
@@ -53,6 +49,34 @@ global.env = secureEnv({secret:'mySecretPassword'});
 
 ```
 
+### Added fucntionality for CLI
+This fork adds two features to the original package:
+
+#### 1. Output File for Decryption
+You can now use the decrypt cli function with `-o` or `--out`, this outputs the result of the decryption into the file specifed as the parameter: 
+
+```
+yarn df-secure-env .env.staging.enc --decrypt -s $(cat .env.key) -o .env.staging
+```
+Will decrypt the `.env.staging.enc` file into a `.env.staging` file by using the `.env.key` file (which holds the encryption/decryption key)
+
+#### 2. Environment argument to use sensible defaults
+
+**Encryption**: 
+```
+yarn df-secure-env --env production -s $(cat .env.key)
+```
+Will encrypt a `.env.production` file into `.env.production.enc` file using the `.env.key` file
+
+**Decrytion**:
+```
+yarn df-secure-env --env production --decrypt -s $(cat .env.key)
+```
+Will decrypt a `.env.production.enc` into a `.env.production` file using the `.env.key` file
+
+**Notes:** 
+`--env` is optional but if provided will override the input file and output file arguments (if they are provided)
+
 That's it.
 
 `global.env` now has the keys and values you defined in your `.env` file.
@@ -76,10 +100,11 @@ $ secure-env --option <VALUE> <file-path-which-is-to-be-encrypted>
 
 | Option | What does it do | Defaults |
 | ------ | ------ | ------ |
-| --secret <secretKey> | Specify the secret Key which would be later used to decrypt the file. | `mySecret` |
-| --out <file-path> | The encrypted file path that would be created. | `env.enc` |
+| --secret <secretKey> or -s | Specify the secret Key which would be later used to decrypt the file. | `mySecret` |
+| --out <file-path> or -o | The encrypted/decrypted file path that would be created. | `env.enc` |
 | --algo <algoName> | The encryption algorithm that is to be used to encrypt the env file. | `aes256` |
 | --decrypt | prints the decrypted text to stdout
+| --env <environmentName> or -e | The environment that the .env uses i.e `.env.staging.enc` is for the `staging` environment
 
 
 ### Decryption
